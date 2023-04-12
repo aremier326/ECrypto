@@ -3,6 +3,7 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ECrypto.Services;
+using ECrypto.ViewModels.Base;
 
 namespace ECrypto
 {
@@ -21,7 +22,9 @@ namespace ECrypto
             .ConfigureServices(ConfigureServices);
 
         internal static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
-            => services.AddServices();
+            => services
+            .AddViewModels()
+            .AddServices();
 
         protected override async void OnStartup(StartupEventArgs e)
         {
