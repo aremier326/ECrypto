@@ -5,6 +5,7 @@ namespace ECrypto.Services
     public static class ServiceRegistrator
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
-            => services;
+            => services
+            .AddTransient<IApiService, ApiService>();
     }
 }

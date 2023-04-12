@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ECrypto.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TopCurrencyView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TopCurrencyView : UserControl
     {
-        public MainWindow()
+        public TopCurrencyView()
         {
             InitializeComponent();
         }
