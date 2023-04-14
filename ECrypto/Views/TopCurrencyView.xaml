@@ -17,9 +17,8 @@
 
         <DataGrid ItemsSource="{Binding Currencies}" Grid.Row="1"
                   CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False"
-                  ColumnWidth="*">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Rank" Binding="{Binding Rank}"/>
+                  HeadersVisibility="Column" ColumnWidth="*">
+            <DataGrid.Columns>               
                 <DataGridTemplateColumn Header="Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

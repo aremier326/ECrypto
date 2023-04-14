@@ -42,11 +42,21 @@ namespace ECrypto.Services
 
         public async Task<Currency> GetCurrencyAsync(string id)
         {
-            string requestUri = ApiEndPoints.Assets + $"/{id}";
+            string requestUri = ApiEndPoints.GetAsset(id);
             HttpResponseMessage response = await _httpClient.GetAsync(requestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             var res = await response.Content?.ReadAsStringAsync();
             var rootJson = JsonConvert.DeserializeObject<JsonObject<Currency>>(res);
+            return rootJson.Data;
+        }
+
+        public async Task<List<Market>> GetMarketsAsync(string id)
+        {
+            string requestUri = ApiEndPoints.GetMarkets(id);
+            HttpResponseMessage response = await _httpClient.GetAsync(requestUri).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var res = await response.Content.ReadAsStringAsync();
+            var rootJson = JsonConvert.DeserializeObject<JsonArray<Market>>(res);
             return rootJson.Data;
         }
 

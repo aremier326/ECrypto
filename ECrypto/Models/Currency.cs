@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ECrypto.Models.Base;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Globalization;
@@ -6,7 +7,7 @@ using System.Globalization;
 
 namespace ECrypto.Models
 {
-    public class Currency
+    public class Currency : Model
     {
         private string? _priceUsd;
         private string? _changePercent24Hr;
@@ -39,7 +40,15 @@ namespace ECrypto.Models
         public string? MaxSupply
         {
             get => _maxSupply;
-            set => _maxSupply = TransformBigNumber(value);
+            set
+            {
+                if (value == null)
+                {
+                    _maxSupply = "UNLIM";
+                    return;
+                }
+                _maxSupply = TransformBigNumber(value);
+            }
         }
 
         [JsonProperty("marketCapUsd")]
@@ -75,41 +84,6 @@ namespace ECrypto.Models
         {
             get => _vwap24Hr;
             set => _vwap24Hr = TransformRegularNumber(value);
-        }
-
-        private string ConvertBig(decimal num)
-        {
-            bool isB = false;
-            bool isM = false;
-            if (num > 1000000000)
-            {
-                num = num / 1000000000;
-                isB = true;
-            }
-            else if (num > 1000000)
-            {
-                num = num / 1000000;
-                isM = true;
-            }
-            num = Math.Round(num, 2);
-            string res = num.ToString();
-            if (isB) res = res + "b";
-            if (isM) res = res + "m";
-            return res;
-        }
-
-        private string TransformBigNumber(string value)
-        {
-            decimal val;
-            decimal.TryParse(value, NumberStyles.Currency, new NumberFormatInfo() { NumberDecimalSeparator = "." }, out val);
-            return ConvertBig(val);
-        }
-        private string TransformRegularNumber(string value)
-        {
-            decimal val;
-            decimal.TryParse(value, NumberStyles.Currency, new NumberFormatInfo() { NumberDecimalSeparator = "." }, out val);
-            val = Math.Round(val, 2);
-            return val.ToString();
         }
     }
 }

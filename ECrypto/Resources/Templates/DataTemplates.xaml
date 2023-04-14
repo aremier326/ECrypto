@@ -9,4 +9,7 @@
     <DataTemplate DataType="{x:Type vm:CurrencyDetailsVM}">
         <view:DetailInfo DataContext="{Binding}"/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CurrencyInfoVM}">
+        <view:CurrencyInfo DataContext="{Binding}"/>
+    </DataTemplate>
 </ResourceDictionary>

@@ -7,26 +7,31 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <ComboBox ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency}"
-                  Grid.Row="0" Height="25" Width="200" HorizontalAlignment="Left" Margin="10 0 0 0">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock>
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0} ({1})">
-                                <Binding Path="Name" />
-                                <Binding Path="Symbol" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-
-        <local:CurrencyInfo Grid.Row="1" DataContext="{Binding SelectedCurrency}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.35*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" Margin="5">
+            <TextBox Text="{Binding SearchCriteria, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Top"/>
+            <ListBox ItemsSource="{Binding FilteredCurrencies}" SelectedItem="{Binding SelectedCurrency}"
+                      ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} ({1})">
+                                        <Binding Path="Name"/>
+                                        <Binding Path="Symbol"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock Text="{Binding Rank,StringFormat={}Rank {0}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        <ContentControl Content="{Binding InfoVM}" Margin="5" Grid.Column="1"/>
     </Grid>
 </UserControl>
