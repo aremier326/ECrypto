@@ -6,6 +6,6 @@ namespace ECrypto.Services
 {
     public interface IApiService
     {
-        public Task<List<Currency>> GetCurrenciesAsync();
+        public Task<List<Currency>> GetCurrenciesAsync(int count = -1);
     }
 }

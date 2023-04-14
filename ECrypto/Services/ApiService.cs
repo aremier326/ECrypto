@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-
+using System.Windows.Navigation;
 
 namespace ECrypto.Services
 {
@@ -23,7 +23,7 @@ namespace ECrypto.Services
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<Currency>> GetCurrenciesAsync()
+        public async Task<List<Currency>> GetCurrenciesAsync(int count = -1)
         {
             string requestUri = ApiEndPoints.CoinMarkets + "?vs_currency=usd";
 
@@ -33,9 +33,11 @@ namespace ECrypto.Services
 
             var res = await response.Content.ReadAsStringAsync();
 
-            var rootJson = JsonConvert.DeserializeObject<RootJson>(res);
+            var currencies = JsonConvert.DeserializeObject<List<Currency>>(res);
 
-            return rootJson.Data;
+            if (count > 0) currencies = currencies.GetRange(0, count);
+
+            return currencies;
         }
 
     }
