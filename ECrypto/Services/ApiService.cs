@@ -25,7 +25,9 @@ namespace ECrypto.Services
 
         public async Task<List<Currency>> GetCurrenciesAsync(int count = -1)
         {
-            string requestUri = ApiEndPoints.CoinMarkets + "?vs_currency=usd";
+            string requestUri = ApiEndPoints.Assets;
+
+            if (count > 0) requestUri = requestUri + $"?limit={count}";
 
             HttpResponseMessage response = await _httpClient.GetAsync(requestUri).ConfigureAwait(false);
 
@@ -33,11 +35,19 @@ namespace ECrypto.Services
 
             var res = await response.Content.ReadAsStringAsync();
 
-            var currencies = JsonConvert.DeserializeObject<List<Currency>>(res);
+            var rootJson = JsonConvert.DeserializeObject<JsonArray<Currency>>(res);
 
-            if (count > 0) currencies = currencies.GetRange(0, count);
+            return rootJson.Data;
+        }
 
-            return currencies;
+        public async Task<Currency> GetCurrencyAsync(string id)
+        {
+            string requestUri = ApiEndPoints.Assets + $"/{id}";
+            HttpResponseMessage response = await _httpClient.GetAsync(requestUri).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+            var res = await response.Content?.ReadAsStringAsync();
+            var rootJson = JsonConvert.DeserializeObject<JsonObject<Currency>>(res);
+            return rootJson.Data;
         }
 
     }

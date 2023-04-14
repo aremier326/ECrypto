@@ -4,13 +4,13 @@ using ECrypto.Services;
 using ECrypto.ViewModels.Base;
 using System.Collections.Generic;
 using System.Windows.Input;
+using ECrypto.Views;
 
 namespace ECrypto.ViewModels
 {
     public class MainWindowVM : ViewModel
     {
-        private TopCurrencyVM topCurrencyVM;
-        private CurrencyDetailsVM currencyDetailsVM;
+
         private ViewModel curVm;
 
         public ViewModel CurrentVm
@@ -21,9 +21,7 @@ namespace ECrypto.ViewModels
 
         public MainWindowVM()
         {
-            topCurrencyVM = new TopCurrencyVM();
-            currencyDetailsVM = new CurrencyDetailsVM();
-            CurrentVm = topCurrencyVM;
+            CurrentVm = new TopCurrencyVM();
         }
 
 
@@ -32,15 +30,15 @@ namespace ECrypto.ViewModels
         private ICommand showTopCommand;
         public ICommand ShowTopCommand
             => showTopCommand ??= new RelayCommand(OnShowTopExecuted, CanShowTopExecute);
-        
+
         private void OnShowTopExecuted(object o)
         {
-            if (CurrentVm == topCurrencyVM) return;
-            CurrentVm = topCurrencyVM;
+            if (CurrentVm.GetType() == typeof(TopCurrencyVM)) return;
+            CurrentVm = new TopCurrencyVM();
         }
 
         private bool CanShowTopExecute(object o)
-            => CurrentVm != topCurrencyVM;
+            => CurrentVm.GetType() != typeof(TopCurrencyVM);
 
         #endregion
 
@@ -51,10 +49,11 @@ namespace ECrypto.ViewModels
 
         private void OnShowDetailExecuted(object o)
         {
-            if (CurrentVm == currencyDetailsVM) return;
-            CurrentVm = currencyDetailsVM;
+            if (CurrentVm.GetType() == typeof(CurrencyDetailsVM)) return;
+            CurrentVm = new CurrencyDetailsVM();
         }
-        private bool CanShowDetailExetute(object o) => CurrentVm != currencyDetailsVM;
+        private bool CanShowDetailExetute(object o)
+            => CurrentVm.GetType() != typeof(CurrencyDetailsVM);
 
         #endregion
     }

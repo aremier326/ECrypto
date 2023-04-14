@@ -16,9 +16,10 @@
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding Currencies}" Grid.Row="1"
-                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False" ColumnWidth="*">
+                  CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="False"
+                  ColumnWidth="*">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Rank" Binding="{Binding MarketCapRank}"/>
+                <DataGridTextColumn Header="Rank" Binding="{Binding Rank}"/>
                 <DataGridTemplateColumn Header="Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -33,39 +34,12 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Price" Binding="{Binding CurrentPrice}"/>
-                <DataGridTemplateColumn Header="Price Change">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0} ({1}%)">
-                                        <Binding Path="PriceChange24h"/>
-                                        <Binding Path="PriceChangePercentage24h"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCap}"/>
-                <DataGridTemplateColumn Header="Market Cap Change">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{}{0} ({1}%)">
-                                        <Binding Path="MarketCapChange24H"/>
-                                        <Binding Path="MarketCapChangePercentage24H"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Supply" Binding="{Binding CirculatingSupply}"/>
-                <DataGridTextColumn Header="Volume" Binding="{Binding TotalVolume}"/>
-                <DataGridTextColumn Header="ATH" Binding="{Binding ATH}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding PriceUsd}"/>
+                <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapUsd}"/>
+                <DataGridTextColumn Header="VWAP(24Hr)" Binding="{Binding Vwap24Hr}"/>
+                <DataGridTextColumn Header="Supply" Binding="{Binding Supply}"/>
+                <DataGridTextColumn Header="Volume" Binding="{Binding VolumeUsd24Hr}"/>
+                <DataGridTextColumn Header="Change(24Hr)" Binding="{Binding ChangePercent24Hr}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

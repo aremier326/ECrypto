@@ -8,20 +8,19 @@ namespace ECrypto.Models
 {
     public class Currency
     {
-        private string? _currentPrice;
-        private string? _priceChange24h;
-        private string? _priceChangePercentage24h;
-        private string? _marketCap;
-        private string? _marketCapChange24h;
-        private string? _marketCapChangePercentage24h;
-        private string? _circulatingSupply;
-        private string? _totalVolume;
-        private string? _ath;
-
-
+        private string? _priceUsd;
+        private string? _changePercent24Hr;
+        private string? _supply;
+        private string? _maxSupply;
+        private string? _volumeUsd24Hr;
+        private string? _vwap24Hr;
+        private string? _marketCapUsd;
 
         [JsonProperty("id")]
         public string? Id { get; set; }
+
+        [JsonProperty("rank")]
+        public string? Rank { get; set; }
 
         [JsonProperty("symbol")]
         public string? Symbol { get; set; }
@@ -29,104 +28,54 @@ namespace ECrypto.Models
         [JsonProperty("name")]
         public string? Name { get; set; }
 
-        [JsonProperty("current_price")]
-        public string? CurrentPrice
+        [JsonProperty("supply")]
+        public string? Supply
         {
-            get => _currentPrice;
-            set => _currentPrice = TransformRegularNumber(value);
+            get => _supply;
+            set => _supply = TransformBigNumber(value);
         }
 
-        [JsonProperty("market_cap")]
-        public string? MarketCap
+        [JsonProperty("maxSupply")]
+        public string? MaxSupply
         {
-            get => _marketCap;
-            set => _marketCap = TransformBigNumber(value);
+            get => _maxSupply;
+            set => _maxSupply = TransformBigNumber(value);
         }
 
-        [JsonProperty("market_cap_rank")]
-        public string? MarketCapRank { get; set; }
-
-        [JsonProperty("fully_diluted_valuation")]
-        public string? FullyDilutedValuation { get; set; }
-
-        [JsonProperty("total_volume")]
-        public string? TotalVolume
+        [JsonProperty("marketCapUsd")]
+        public string? MarketCapUsd
         {
-            get => _totalVolume;
-            set => _totalVolume = TransformBigNumber(value);
+            get => _marketCapUsd;
+            set => _marketCapUsd = TransformBigNumber(value);
         }
 
-        [JsonProperty("high_24h")]
-        public string? High24h { get; set; }
-
-        [JsonProperty("low_24h")]
-        public string? Low24h { get; set; }
-
-        [JsonProperty("price_change_24h")]
-        public string? PriceChange24h
+        [JsonProperty("volumeUsd24Hr")]
+        public string? VolumeUsd24Hr
         {
-            get => _priceChange24h;
-            set => _priceChange24h = TransformRegularNumber(value);
+            get => _volumeUsd24Hr;
+            set => _volumeUsd24Hr = TransformBigNumber(value);
         }
 
-        [JsonProperty("price_change_percentage_24h")]
-        public string? PriceChangePercentage24h
+        [JsonProperty("priceUsd")]
+        public string? PriceUsd
         {
-            get => _priceChangePercentage24h;
-            set => _priceChangePercentage24h = TransformRegularNumber(value);
+            get => _priceUsd;
+            set => _priceUsd = TransformRegularNumber(value);
         }
 
-        [JsonProperty("market_cap_change_24h")]
-        public string? MarketCapChange24H
+        [JsonProperty("changePercent24Hr")]
+        public string? ChangePercent24Hr
         {
-            get => _marketCapChange24h;
-            set => _marketCapChange24h = TransformRegularNumber(value);
+            get => _changePercent24Hr;
+            set => _changePercent24Hr = TransformRegularNumber(value);
         }
 
-        [JsonProperty("market_cap_change_percentage_24h")]
-        public string? MarketCapChangePercentage24H
+        [JsonProperty("vwap24Hr")]
+        public string? Vwap24Hr
         {
-            get => _marketCapChangePercentage24h;
-            set => _marketCapChangePercentage24h = TransformRegularNumber(value);
+            get => _vwap24Hr;
+            set => _vwap24Hr = TransformRegularNumber(value);
         }
-
-        [JsonProperty("circulating_supply")]
-        public string? CirculatingSupply
-        {
-            get => _circulatingSupply;
-            set => _circulatingSupply = TransformBigNumber(value);
-        }
-
-        [JsonProperty("total_supply")]
-        public string? TotalSupply { get; set; }
-
-        [JsonProperty("max_supply")]
-        public string? MaxSupply { get; set; }
-
-        [JsonProperty("ath")]
-        public string? ATH
-        {
-            get => _ath;
-            set => _ath = TransformRegularNumber(value);
-        }
-
-        [JsonProperty("ath_change_percentage")]
-        public string? ATHChangePercentage { get; set; }
-
-        [JsonProperty("ath_date")]
-        public string? ATHDate { get; set; }
-
-        [JsonProperty("atl")]
-        public string? ATL { get; set; }
-
-        [JsonProperty("atl_change_percentage")]
-        public string? ATLChangePercentage { get; set; }
-
-        [JsonProperty("atl_date")]
-        public string? ATLDate { get; set; }
-
-        [JsonProperty("last_updated")]
-        public string? LastUpdated { get; set; }
 
         private string ConvertBig(decimal num)
         {
