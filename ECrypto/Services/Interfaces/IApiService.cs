@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ECrypto.Services
+namespace ECrypto.Services.Interfaces
 {
     public interface IApiService
     {

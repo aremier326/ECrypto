@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ECrypto.Services;
 using ECrypto.ViewModels.Base;
+using ECrypto.Services.Interfaces;
 
 namespace ECrypto
 {
@@ -31,6 +32,10 @@ namespace ECrypto
             var host = Host;
             base.OnStartup(e);
             await host.StartAsync();
+            using (var scope = Services.CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<IThemeService>().InitTheme();
+            }
         }
 
         protected override async void OnExit(ExitEventArgs e)

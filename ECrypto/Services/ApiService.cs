@@ -1,5 +1,6 @@
 ﻿using ECrypto.Models;
 using ECrypto.Services.ApiEndpoints;
+using ECrypto.Services.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

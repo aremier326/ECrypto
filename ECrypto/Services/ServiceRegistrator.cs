@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ECrypto.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ECrypto.Services
 {
@@ -6,6 +7,8 @@ namespace ECrypto.Services
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
             => services
-            .AddTransient<IApiService, ApiService>();
+            .AddTransient<IApiService, ApiService>()
+            .AddTransient<IThemeService, ThemeService>();
+
     }
 }

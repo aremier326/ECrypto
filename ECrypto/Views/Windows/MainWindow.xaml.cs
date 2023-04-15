@@ -23,5 +23,15 @@ namespace ECrypto.Views.Windows
         {
             InitializeComponent();
         }
+
+        private void TopBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void TopBar_CloseButtonClicked(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
