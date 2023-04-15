@@ -1,15 +1,13 @@
-﻿using ECrypto.Models;
-using ECrypto.Commands;
-using ECrypto.Services;
+﻿using ECrypto.Commands;
 using ECrypto.ViewModels.Base;
-using System.Collections.Generic;
 using System.Windows.Input;
-using ECrypto.Views;
 
 namespace ECrypto.ViewModels
 {
     public class MainWindowVM : ViewModel
     {
+        public string Title { get; set; } = "ECrypto";
+
 
         private ViewModel curVm;
 

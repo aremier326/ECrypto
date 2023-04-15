@@ -3,7 +3,6 @@ using ECrypto.Services.Interfaces;
 using ECrypto.ViewModels.Base;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
-using System.Windows.Documents;
 
 namespace ECrypto.ViewModels
 {
